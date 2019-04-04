@@ -1,0 +1,14 @@
+plan for developing a site using: JavaScript/HTML/CSS
+
+Step 1. HTMl docs for the site (done)
+Step 2. CSS the site (done)
+Step 3. Create a shopping cart using JS (in progress)
+Step 4. Configure the JSON responses 
+Step 6. Create your own localhost setup
+Step 5. Sort out Mongo DB
+Step 7. Create an instance on Git
+Step 8. 
+Step 9.
+Step 10.
+Step 11.
+Step 12.
