@@ -5,7 +5,7 @@
 		width:90%;
 		left:5%;
 		background-color:#EFCB9C;
-		-webkit-box-shadow: 7px 7px 7px black;
+		box-shadow: 7px 7px 7px black;
 		border-radius:19px;
 		font-family:AR BERKLEY;
 		text-align:center;
@@ -17,7 +17,7 @@
 		bottom:10%;
 		left:30%;
 		background-color:#009999;
-		-webkit-box-shadow: 2px 2px 2px black;
+		box-shadow: 2px 2px 2px black;
 		border-radius:9px;
 		font-family:AR BERKLEY;
 	}
@@ -40,3 +40,15 @@
 	.message{
 		padding:10px;
 	}
+    .baddy {
+            position: absolute;
+            height: 60px;
+            width: 30px;
+            top: 0;
+            left: 0;
+            background-color: blue;
+            color: white;
+            font-size: 2em;
+            line-height: 100px;
+            text-align: center;
+        }

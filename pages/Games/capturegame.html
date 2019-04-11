@@ -6,6 +6,11 @@
     <link rel="stylesheet" type="text/css" href="../styles/stylesheetgame.css" >
 	</head>
 	<body>
+        <div class="background-wrap">
+<video id="video-bg-elem" preload="auto" autoplay="true" loop="loop" muted="muted">
+<source src="..\videos\4K Magical Ground 2160p Beautiful Animated Wallpaper HD Background video effect 1080p - 10Youtube.com.mp4" type="video/mp4"></video>
+video background not supported!
+</div>
     <div class="topbar">Score: <span class="score">0</span> buggers left: <span class="badLeft">0</span> </div>
     <div class="container">
         <div class="message">Click ME To Play!</div>
@@ -43,10 +48,10 @@
         document.addEventListener("keyup", pressKeyOff);
         //player object
         let player = {
-            score: 0
-            , totalBad: 0
-            , inPlay: false
-            , speed: 20
+             score: 0,
+             totalBad: 0,
+             inPlay: false,
+             speed: 20,
         };
         //Once selecting button to play game
         //update global variables and start animation frame
@@ -55,10 +60,34 @@
             message.style.display = "none";
             btn.style.display = "none";
             player.score = 0;
-            player.totalBad = 100;
+            player.totalBad = 50;
             player.inPlay = true;
             scoreupdate();
+            setupBadGuys(6);
             requestAnimationFrame(playGame);
+        }
+        //creating the bad guys
+        function setupBadGuys(num) {
+            for (let x = 0; x < num; x++) {
+                makeBad();
+            }
+        }
+        function makeBad() {
+            if (player.totalBad > 0) {
+                let temp = player.totalBad;
+                player.totalBad--;
+                scoreupdate();
+                let div = document.createElement("div");
+                div.innerHTML = "#" + temp;
+                div.classList.add("baddy");
+                div.x = Math.floor(Math.random() * boundContainer.width - 100);
+                if (div.x < 0) div.x = 100;
+                div.y = (Math.floor(Math.random() * 500) * -1) - 200;
+                div.speed = Math.ceil(Math.random() * 10) + 3;
+                container.appendChild(div);
+                div.style.left = div.x + "px";
+                div.style.top = div.y + "px";
+            }
         }
         //user basket/catcher
         function playGame() {
@@ -78,7 +107,26 @@
                 basket.style.left = boundBasket.x + "px";
                 basket.style.top = boundBasket.y + "px";
                 requestAnimationFrame(playGame);
+                
+                let tempEnemy = document.querySelectorAll(".baddy");
+                if(tempEnemy.length == 0){
+                    //end game
+                }else{
+                    for(let i = 0; i < tempEnemy.length;i++){
+                        bgMover(tempEnemy[i]);
+                    }
+                }
+                console.log(tempEnemy);
             }
+        }
+        //this is what gets the items to fall
+        function bgMover(e){
+            console.log(e)
+            e.y +=e.speed;
+            if(e.y > boundContainer.height - 100){
+                e.y=-100;
+            }
+            e.style.top = e.y + "px";
         }
         //score output
         function scoreupdate() {
