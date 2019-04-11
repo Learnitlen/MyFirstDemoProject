@@ -34,7 +34,8 @@
 		width:80px;
 		bottom:10%;
 		left:30%;
-		background-color:#009999;
+		background-color:#594234;
+        border-color: black;
 		box-shadow: 2px 2px 2px black;
 		border-radius:9px;
 		font-family:AR BERKLEY;
@@ -69,12 +70,12 @@
     .baddy {
             position: absolute;
             height: 60px;
-            width: 30px;
+            width: 40px;
             top: 0;
             left: 0;
-            background-color: blue;
+            background-color: black;
             color: white;
-            font-size: 2em;
+            font-size: 1em;
             line-height: 100px;
             text-align: center;
         }
