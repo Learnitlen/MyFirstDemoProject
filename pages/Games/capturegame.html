@@ -1,0 +1,90 @@
+<html>
+	<head>
+	<title>A Game?</title>
+	<meta charset="utf-8"/>
+  	<!-- <link rel="shortcut icon" href="..\Games\photos\favicon.ico" type="image/vnd.microsoft.icon" /> -->
+    <link rel="stylesheet" type="text/css" href="../styles/stylesheetgame.css" >
+	</head>
+	<body>
+    <div class="topbar">Score: <span class="score">0</span> buggers left: <span class="badLeft">0</span> </div>
+    <div class="container">
+        <div class="message">Click ME To Play!</div>
+        <div class="btn">Start Button</div>
+        <div class="basket"></div>
+    </div>
+    <script>
+        //Global variables
+        const message = document.querySelector(".message");
+        const scoreOutput = document.querySelector(".score");
+        const badLeft = document.querySelector(".badLeft");
+        const btn = document.querySelector(".btn");
+        const basket = document.querySelector(".basket");
+        //create a container so that the basket doesnt go missing
+        const container = document.querySelector(".container");
+        let boundBasket = basket.getBoundingClientRect();
+        let boundContainer = container.getBoundingClientRect();
+        //arrow keys object
+        let keys = {
+            ArrowUp: false
+            , ArrowDown: false
+            , ArrowLeft: false
+            , ArrowRight: false
+        }
+        function pressKeyOn(event) {
+            event.preventDefault();
+            keys[event.key] = true;
+        }
+
+        function pressKeyOff(event) {
+            event.preventDefault();
+            keys[event.key] = false;
+        }
+        document.addEventListener("keydown", pressKeyOn);
+        document.addEventListener("keyup", pressKeyOff);
+        //player object
+        let player = {
+            score: 0
+            , totalBad: 0
+            , inPlay: false
+            , speed: 20
+        };
+        //Once selecting button to play game
+        //update global variables and start animation frame
+        btn.addEventListener("click", startGame);
+        function startGame() {
+            message.style.display = "none";
+            btn.style.display = "none";
+            player.score = 0;
+            player.totalBad = 100;
+            player.inPlay = true;
+            scoreupdate();
+            requestAnimationFrame(playGame);
+        }
+        //user basket/catcher
+        function playGame() {
+            if (player.inPlay == true) {
+                if (keys.ArrowDown && boundBasket.y < (boundContainer.height - boundBasket.height)) {
+                    boundBasket.y += player.speed;
+                }
+                if (keys.ArrowUp && boundBasket.y>0) {
+                    boundBasket.y -= player.speed;
+                }
+                if (keys.ArrowLeft && boundBasket.x>0) {
+                    boundBasket.x -= player.speed;
+                }
+                if (keys.ArrowRight && boundBasket.x < (boundContainer.width - boundBasket.width)) {
+                    boundBasket.x += player.speed;
+                }
+                basket.style.left = boundBasket.x + "px";
+                basket.style.top = boundBasket.y + "px";
+                requestAnimationFrame(playGame);
+            }
+        }
+        //score output
+        function scoreupdate() {
+            scoreOutput.textContent = player.score;
+            badLeft.textContent = player.totalBad;
+        }
+    </script>
+</body>
+</html>
